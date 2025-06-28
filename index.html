@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="javascript.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <header>
@@ -19,23 +21,37 @@
 
     <main>
         <div class="new-book-container">
-            <h3>Add Book</h3>
             <form>
-                <label for="book-title">Title</label>
-                <input type="text" id="book-title" placeholder="Book title...">
+                <div class="container">
+                    <div class="form-item">
+                        <label for="book-title">Title</label>
+                        <input type="text" id="book-title" placeholder="Book title..." required>
+                    </div>
 
-                
-                <label for="author-name">Author</label>
-                <input type="text" id="author-name" placeholder="Author's name...">
+                    <div class="form-item">
+                        <label for="author-name">Author</label>
+                        <input type="text" id="author-name" placeholder="Author's name..." required>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="form-item">
+                        <label for="pages">Pages</label>
+                        <input type="number" id="pages" min="1">
+                    </div>
 
-                <label for="pages">Pages</label>
-                <input type="number" id="pages" min="1">
+                    <div class="form-item">
+                        <label for="year-published">Year</label>
+                        <input type="number" id="year-published" min="1">
+                    </div>
 
-                <label for="year-published">Year</label>
-                <input type="number" id="year-published" min="1">
-                
-                <label for="finished-book">I already finished this book</label>
-                <input type="checkbox" id="finished-book" value="yes">
+                    <div class="form-item">
+                        <label for="finished-book">I already finished this book</label>
+                        <input type="checkbox" id="finished-book" value="yes">
+                        
+                    </div>
+                </div>
+
+                <input type="submit" value="Add Book">
             </form>
         </div>
 
@@ -43,4 +59,5 @@
     </main>
 
 </body>
+
 </html>
