@@ -79,34 +79,44 @@ main {
 
 /* ADD BOOK FORM */
 
-.new-book-container {
+form {
     padding: 1rem;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 1rem;
 
-    width: 50%;
     justify-self: center;
 
     background-color: var(--off-white);
-    border-radius: 8px;;
+    border-radius: 8px;
     box-shadow: 2px 4px 5px lightgray;
 }
 
-form {
-    display: grid;
+form .upper-container,
+form .lower-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
-form .container {
-    display: flex;
+form .upper-container * {
+    width: 50%;
+}
+
+form .upper-container * > input {
+    width: 100%;
 }
 
 form .form-item {
     display: grid;
 }
 
-form .input {
-    
+form input[type="submit"] {
+    background-color: var(--brand-color);
+    border-style: none;
+    border-radius: 8px;
+    width: 30%;
+    justify-self: center;
 }
 
 
