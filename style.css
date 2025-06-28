@@ -1,7 +1,9 @@
 :root {
     --off-black: rgb(25, 25, 25);
     --off-white: rgb(251, 251, 251);
-    --brand-blue: rgb(76, 143, 202);
+    --brand-color: rgb(103, 174, 110);
+    --dark-brand-color: rgb(50, 142, 110);
+    --light-brand-color: rgb(144, 198, 124);
 }
 
 *, *::before, *::after {
@@ -33,7 +35,7 @@ header {
 header .highlight {
     width: 100%;
     height: 8%;
-    background-color: var(--brand-blue);
+    background-color: var(--brand-color);
 
     box-shadow: 0px 2px 5px lightgray;
 }
@@ -54,11 +56,11 @@ header .text-container h1 {
 header .text-container a {
     text-decoration: none;
     font-weight: 600;
-    color: rgb(83, 83, 83)
+    color: var(--brand-color);
 }
 
 header .text-container a:hover {
-    color: var(--off-black)
+    color: var(--dark-brand-color)
 }
 
 
