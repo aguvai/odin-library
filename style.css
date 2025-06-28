@@ -1,6 +1,62 @@
+:root {
+    --off-black: rgb(25, 25, 25);
+    --off-white: rgb(251, 251, 251);
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
 	padding: 0;
-	border: 0;
+}
+
+body {
+    background-color: rgb(240, 240, 240);
+}
+
+.card-container {
+    padding: 2rem;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill,  minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.book-card {
+    background-color: var(--off-white);
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .25rem;
+
+    text-align: center;
+
+    box-shadow: 2px 4px 5px lightgray;
+}
+
+.book-card .divider {
+    height: 1px;
+    background-color: lightgray;
+    width: 85%;
+}
+
+.book-card .info-container {
+    display: flex;
+    gap: .5rem;
+}
+
+.info-container .info-divider {
+    align-self: center;
+
+    width: .4rem;
+    height: .4rem;
+
+    background-color: black;
+
+    border-radius: 50%;
 }
