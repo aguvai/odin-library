@@ -29,6 +29,8 @@ body {
     background-color: var(--off-white);
     border-radius: 8px;
 
+    padding: 1rem;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,18 +41,25 @@ body {
     box-shadow: 2px 4px 5px lightgray;
 }
 
-.book-card .divider {
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.info-container .divider {
     height: 1px;
     background-color: lightgray;
     width: 85%;
 }
 
-.book-card .info-container {
+.info-container .subinfo-container {
     display: flex;
     gap: .5rem;
 }
 
-.info-container .info-divider {
+.subinfo-container .info-divider {
     align-self: center;
 
     width: .4rem;

@@ -31,33 +31,37 @@ function createBookCard(book) {
     mainCard.classList.add("book-card");
     cardContainer.appendChild(mainCard);
 
-    const titleText = document.createElement("h2");
-    titleText.innerText = book.title;
-    mainCard.appendChild(titleText);
-
-    const authorText = document.createElement("h3");
-    authorText.innerText = book.author;
-    mainCard.appendChild(authorText);
-
-    const divider = document.createElement("div")
-    divider.classList.add("divider");
-    mainCard.appendChild(divider);
-
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info-container");
     mainCard.appendChild(infoContainer);
 
+    const titleText = document.createElement("h2");
+    titleText.innerText = book.title;
+    infoContainer.appendChild(titleText);
+
+    const authorText = document.createElement("h3");
+    authorText.innerText = book.author;
+    infoContainer.appendChild(authorText);
+
+    const divider = document.createElement("div")
+    divider.classList.add("divider");
+    infoContainer.appendChild(divider);
+
+    const subinfoContainer = document.createElement("div");
+    subinfoContainer.classList.add("subinfo-container");
+    infoContainer.appendChild(subinfoContainer);
+
     const pagesText = document.createElement("p");
     pagesText.innerText = `${book.pages} pages`;
-    infoContainer.appendChild(pagesText);
+    subinfoContainer.appendChild(pagesText);
 
     const infoDivider = document.createElement("div")
     infoDivider.classList.add("info-divider");
-    infoContainer.appendChild(infoDivider);
+    subinfoContainer.appendChild(infoDivider);
 
     const yearPublishedText = document.createElement("p");
     yearPublishedText.innerText = `${book.yearPublished}`;
-    infoContainer.appendChild(yearPublishedText);
+    subinfoContainer.appendChild(yearPublishedText);
 }
 
 function displayBooks() {
