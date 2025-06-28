@@ -43,14 +43,20 @@
                     <input type="number" id="year-published" min="1">
                 </div>
 
-                <div class="form-item">
-                    <label for="finished-book">I finished this book</label>
-                    <input type="checkbox" id="finished-book" value="yes">
-
+                <div class="radio-item">
+                    <h3>Have you finished this book?</h3>
+                    
+                    <label for="finished-book-positive">Yes</label>
+                    <input id="finished-book-positive" name="finished-book" type="radio">
+                    
+                    <label for="finished-book-negative">No</label>
+                    <input id="finished-book-negative" name="finished-book" type="radio">
                 </div>
+                
             </div>
 
             <input type="submit" value="Add Book">
+            
         </form>
 
         <div class="card-container"></div>
