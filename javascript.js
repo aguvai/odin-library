@@ -1,40 +1,31 @@
 const myLibrary = [];
 
-function Book (bookData) {
-  if (!new.target) {
-    throw Error("Must use the new operator to call the consturctor!");
-  }
-  
-  this.title = bookData[0];
-  this.author = bookData[1];
-  this.pages = bookData[2];
-  this.yearPublished = bookData[3];
-  this.read = bookData[4];
+function Book(bookData) {
+    if (!new.target) {
+        throw Error("Must use the new operator to call the consturctor!");
+    }
 
-  this.uniqueID = crypto.randomUUID();
-  
-  this.info = function() {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
-  }
+    this.title = bookData[0];
+    this.author = bookData[1];
+    this.pages = bookData[2];
+    this.yearPublished = bookData[3];
+    this.read = bookData[4];
+
+    this.uniqueID = crypto.randomUUID();
+
+    this.info = function () {
+        return `${title} by ${author}, ${pages} pages, ${read}`;
+    }
 }
 
 function addBookToLibrary(title, author, pages, read, yearPublished) {
-    myLibrary.push(new  Book(title, author, pages, read, yearPublished));
+    myLibrary.push(new Book(title, author, pages, read, yearPublished));
 }
 
 const cardContainer = document.querySelector(".card-container");
 
-function createBookCard(book) {
-    const mainCard = document.createElement("div");
-    mainCard.classList.add("book-card");
-    cardContainer.appendChild(mainCard);
 
-    const highlight = document.createElement("div");
-    highlight.classList.add("highlight");
-    mainCard.appendChild(highlight);
-    
-    // DATA DISPAY ELEMENTS
-
+function createMainInfoContainer(book, mainCard) {
     const infoHeader = document.createElement("div");
     infoHeader.classList.add("info-header");
     mainCard.appendChild(infoHeader);
@@ -51,57 +42,97 @@ function createBookCard(book) {
     authorText.innerText = `by ${book.author}`;
     infoContainer.appendChild(authorText);
 
+    return infoHeader
+}
 
-    // BUTTONS
+
+function createButtons(book, mainCard) {
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove from Library";
     mainCard.appendChild(removeButton);
 
+    removeButton.addEventListener("click", () => {
 
-    // EXTRA INFO DATA DISPLAY
+    })
+
+    const toggleReadButton = document.createElement("button");
+    toggleReadButton.innerHTML = "Read";
+    mainCard.appendChild(toggleReadButton);
+
+    toggleReadButton.addEventListener("click", () => {
+
+    })
+}
+
+
+function createYearPublishedDisplay(book, subInfoContainer) {
+    const yearDiv = document.createElement("div");
+    yearDiv.classList.add("year-div")
+    subInfoContainer.appendChild(yearDiv)
+
+    const yearHeaderText = document.createElement("h4");
+    yearHeaderText.innerText = "Published";
+    yearDiv.appendChild(yearHeaderText);
+
+    const yearPublishedText = document.createElement("p");
+    yearPublishedText.innerText = `${book.yearPublished}`;
+    yearDiv.appendChild(yearPublishedText);
+}
+
+function createPagesDisplay(book, subInfoContainer) {
+    const pagesDiv = document.createElement("div");
+    pagesDiv.classList.add("pages-div")
+    subInfoContainer.appendChild(pagesDiv)
+
+    const pagesHeaderText = document.createElement("h4");
+    pagesHeaderText.innerText = "Pages";
+    pagesDiv.appendChild(pagesHeaderText);
+
+    const pagesText = document.createElement("p");
+    pagesText.innerText = `${book.pages}`;
+    pagesDiv.appendChild(pagesText);
+}
+
+function createExtraInfoDisplay(book, infoHeader) {
+    const divider = document.createElement("div")
+    divider.classList.add("divider");
+    infoHeader.appendChild(divider);
+
+    const subInfoContainer = document.createElement("div");
+    subInfoContainer.classList.add("subinfo-container");
+    infoHeader.appendChild(subInfoContainer);
+
+    if (book.yearPublished) {
+        createYearPublishedDisplay(book, subInfoContainer);
+    }
+
+    if (book.pages && book.yearPublished) {
+        const infoDivider = document.createElement("div")
+        infoDivider.classList.add("info-divider");
+        subInfoContainer.appendChild(infoDivider);
+    }
+
+    if (book.pages) {
+        createPagesDisplay(book, subInfoContainer);
+    }
+}
+
+
+function createBookCard(book) {
+    const mainCard = document.createElement("div");
+    mainCard.classList.add("book-card");
+    cardContainer.appendChild(mainCard);
+
+    const highlight = document.createElement("div");
+    highlight.classList.add("highlight");
+    mainCard.appendChild(highlight);
+
+    infoHeader = createMainInfoContainer(book, mainCard);
+
+    createButtons(book, mainCard)
 
     if (book.pages || book.yearPublished) {
-        const divider = document.createElement("div")
-        divider.classList.add("divider");
-        infoHeader.appendChild(divider);
-        
-        const subInfoContainer = document.createElement("div");
-        subInfoContainer.classList.add("subinfo-container");
-        infoHeader.appendChild(subInfoContainer);
-
-        if (book.yearPublished) {
-            const yearDiv = document.createElement("div");
-            yearDiv.classList.add("year-div")
-            subInfoContainer.appendChild(yearDiv)
-            
-            const yearHeaderText = document.createElement("h4");
-            yearHeaderText.innerText = "Published";
-            yearDiv.appendChild(yearHeaderText);
-
-            const yearPublishedText = document.createElement("p");
-            yearPublishedText.innerText = `${book.yearPublished}`;
-            yearDiv.appendChild(yearPublishedText);
-        }
-
-        if (book.pages && book.yearPublished) {
-            const infoDivider = document.createElement("div")
-            infoDivider.classList.add("info-divider");
-            subInfoContainer.appendChild(infoDivider);
-        }
-
-        if (book.pages) {
-            const pagesDiv = document.createElement("div");
-            pagesDiv.classList.add("pages-div")
-            subInfoContainer.appendChild(pagesDiv)
-
-            const pagesHeaderText = document.createElement("h4");
-            pagesHeaderText.innerText = "Pages";
-            pagesDiv.appendChild(pagesHeaderText);
-
-            const pagesText = document.createElement("p");
-            pagesText.innerText = `${book.pages}`;
-            pagesDiv.appendChild(pagesText);
-        }
+        createExtraInfoDisplay(book, infoHeader)
     }
 }
 
@@ -120,12 +151,12 @@ const bookForm = document.querySelector("#add-new-book-form")
 function displayValidity(isValid) {
     if (!isValid) {
         let invalidElements = bookForm.querySelectorAll(':invalid');
-    
+
         invalidElements[0].focus();
-        
+
         invalidElements.forEach((element) => element.style.outline = "2px solid red")
     }
-    
+
     let validElements = bookForm.querySelectorAll(':valid');
     validElements.forEach((element) => element.style.outline = "none");
 }
@@ -139,7 +170,7 @@ document.querySelector("#submit-button").addEventListener("click", (e) => {
         const formData = new FormData(bookForm);
         const bookData = [];
 
-        for (const [key,value] of formData) {
+        for (const [key, value] of formData) {
             bookData.push(value);
         }
 
