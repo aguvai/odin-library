@@ -255,6 +255,12 @@ form input[type="submit"]:hover {
     text-align: center;
 }
 
+.info-header .subinfo-container .info-divider {
+    width: 1px;
+    height: 50%;
+    background-color: darkgray;
+}
+
 .info-header .subinfo-container h4 {
     font-weight: 500;
 }

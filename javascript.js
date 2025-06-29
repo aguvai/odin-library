@@ -63,10 +63,6 @@ function createBookCard(book) {
         subInfoContainer.classList.add("subinfo-container");
         infoHeader.appendChild(subInfoContainer);
 
-        // const infoDivider = document.createElement("div")
-        // infoDivider.classList.add("info-divider");
-        // subInfoContainer.appendChild(infoDivider);
-
         if (book.yearPublished) {
             const yearDiv = document.createElement("div");
             yearDiv.classList.add("year-div")
@@ -79,6 +75,12 @@ function createBookCard(book) {
             const yearPublishedText = document.createElement("p");
             yearPublishedText.innerText = `${book.yearPublished}`;
             yearDiv.appendChild(yearPublishedText);
+        }
+
+        if (book.pages && book.yearPublished) {
+            const infoDivider = document.createElement("div")
+            infoDivider.classList.add("info-divider");
+            subInfoContainer.appendChild(infoDivider);
         }
 
         if (book.pages) {
