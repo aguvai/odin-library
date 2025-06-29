@@ -55,25 +55,47 @@ function createBookCard(book) {
     // EXTRA INFO DATA DISPLAY
 
     if (book.pages || book.yearPublished) {
+        const divider = document.createElement("div")
+        divider.classList.add("divider");
+        infoHeader.appendChild(divider);
+        
         const subInfoContainer = document.createElement("div");
-    subInfoContainer.classList.add("subinfo-container");
-    infoHeader.appendChild(subInfoContainer);
+        subInfoContainer.classList.add("subinfo-container");
+        infoHeader.appendChild(subInfoContainer);
 
-    const divider = document.createElement("div")
-    divider.classList.add("divider");
-    subInfoContainer.appendChild(divider);
+        if (book.pages) {
+            const pagesDiv = document.createElement("div");
+            pagesDiv.classList.add("pages-div")
+            subInfoContainer.appendChild(pagesDiv)
 
-    const pagesText = document.createElement("p");
-    pagesText.innerText = `${book.pages} pages`;
-    subInfoContainer.appendChild(pagesText);
+            const pagesHeaderText = document.createElement("h4");
+            pagesHeaderText.innerText = "PAGES";
+            pagesDiv.appendChild(pagesHeaderText);
 
-    const infoDivider = document.createElement("div")
-    infoDivider.classList.add("info-divider");
-    subInfoContainer.appendChild(infoDivider);
+            const pagesText = document.createElement("p");
+            pagesText.innerText = `${book.pages}`;
+            pagesDiv.appendChild(pagesText);
+        }
 
-    const yearPublishedText = document.createElement("p");
-    yearPublishedText.innerText = `${book.yearPublished}`;
-    subInfoContainer.appendChild(yearPublishedText);
+
+        // const infoDivider = document.createElement("div")
+        // infoDivider.classList.add("info-divider");
+        // subInfoContainer.appendChild(infoDivider);
+
+        if (book.yearPublished) {
+            const yearDiv = document.createElement("div");
+            yearDiv.classList.add("year-div")
+            subInfoContainer.appendChild(yearDiv)
+            
+            const yearHeaderText = document.createElement("h4");
+            yearHeaderText.innerText = "RELEASED";
+            yearDiv.appendChild(yearHeaderText);
+
+            const yearPublishedText = document.createElement("p");
+            yearPublishedText.innerText = `${book.yearPublished}`;
+            yearDiv.appendChild(yearPublishedText);
+        }
+
     }
 }
 
