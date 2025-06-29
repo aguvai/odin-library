@@ -103,6 +103,7 @@ function displayBooks() {
     while (cardContainer.hasChildNodes()) {
         cardContainer.removeChild(cardContainer.lastChild);
     }
+    
     for (let book of myLibrary) {
         createBookCard(book);
     }
