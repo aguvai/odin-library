@@ -110,25 +110,40 @@ function displayBooks() {
 
 const bookForm = document.querySelector("#add-new-book-form")
 
+function displayValidity(isValid) {
+    if (!isValid) {
+        let invalidElements = bookForm.querySelectorAll(':invalid');
+    
+        invalidElements[0].focus();
+        
+        invalidElements.forEach((element) => element.style.outline = "2px solid red")
+    }
+    
+    let validElements = bookForm.querySelectorAll(':valid');
+    validElements.forEach((element) => element.style.outline = "none");
+}
+
 document.querySelector("#submit-button").addEventListener("click", (e) => {
     e.preventDefault();
 
-    if (bookForm.checkValidity() == false) {
-        console.log("missing elements");
+    if (bookForm.checkValidity() == true) {
+        displayValidity(true);
+
+        const formData = new FormData(bookForm);
+        const bookData = [];
+
+        for (const [key,value] of formData) {
+            bookData.push(value);
+        }
+
+        bookForm.reset();
+
+        addBookToLibrary(bookData);
+
+        displayBooks();
+    } else {
+        displayValidity(false);
     }
-
-    const formData = new FormData(bookForm);
-    const bookData = [];
-
-    for (const [key,value] of formData) {
-        bookData.push(value);
-    }
-
-    bookForm.reset();
-
-    addBookToLibrary(bookData);
-
-    displayBooks();
 })
 
 addBookToLibrary(["This is a Book Title", "This is an Author's Name", 2031, 2025, false]);
