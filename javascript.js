@@ -1,15 +1,16 @@
 const myLibrary = [];
 
-function Book (title, author, pages, read, yearPublished) {
+function Book (bookData) {
   if (!new.target) {
     throw Error("Must use the new operator to call the consturctor!");
   }
   
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.yearPublished = yearPublished
+  this.title = bookData[0];
+  this.author = bookData[1];
+  this.pages = bookData[2];
+  this.yearPublished = bookData[3];
+  this.read = bookData[4];
+
   this.uniqueID = crypto.randomUUID();
   
   this.info = function() {
@@ -21,12 +22,9 @@ function addBookToLibrary(title, author, pages, read, yearPublished) {
     myLibrary.push(new  Book(title, author, pages, read, yearPublished));
 }
 
-addBookToLibrary("Cool book!", "Dr. Cool Author, PhD", "199", false, 2024);
-addBookToLibrary("Random book...", "Random Author", "21542", true, 1996);
+const cardContainer = document.querySelector(".card-container");
 
 function createBookCard(book) {
-    const cardContainer = document.querySelector(".card-container");
-
     const mainCard = document.createElement("div");
     mainCard.classList.add("book-card");
     cardContainer.appendChild(mainCard);
@@ -65,24 +63,29 @@ function createBookCard(book) {
 }
 
 function displayBooks() {
+    while (cardContainer.hasChildNodes()) {
+        cardContainer.removeChild(cardContainer.lastChild);
+    }
     for (let book of myLibrary) {
         createBookCard(book);
     }
 }
 
-displayBooks();
-
 const bookForm = document.querySelector("#add-new-book-form")
 
 document.querySelector("#submit-button").addEventListener("click", (e) => {
-    console.log("CLICKED");
     e.preventDefault();
 
     const formData = new FormData(bookForm);
-    
+    const bookData = [];
+
     for (const [key,value] of formData) {
-        console.log(`${key}: ${value}`);
+        bookData.push(value);
     }
 
     bookForm.reset();
+
+    addBookToLibrary(bookData);
+
+    displayBooks();
 })
