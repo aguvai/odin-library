@@ -248,15 +248,17 @@ form input[type="submit"]:hover {
     font-weight: 300;
 }
 
-.info-header .divider {
-    width: 1px;
-    background-color: gray;
-    height: 60%;
-    align-self: center;
+.info-header .subinfo-container {
+    display: flex;
+    gap: 1rem;
+    font-size: .8rem;
+    text-align: center;
 }
 
-.info-header .subinfo-container {
-    display: grid;
-    gap: .5rem;
-    text-align: center;
+.info-header .subinfo-container h4 {
+    font-weight: 500;
+}
+
+.info-header .subinfo-container p {
+    font-weight: 600;
 }

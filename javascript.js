@@ -63,21 +63,6 @@ function createBookCard(book) {
         subInfoContainer.classList.add("subinfo-container");
         infoHeader.appendChild(subInfoContainer);
 
-        if (book.pages) {
-            const pagesDiv = document.createElement("div");
-            pagesDiv.classList.add("pages-div")
-            subInfoContainer.appendChild(pagesDiv)
-
-            const pagesHeaderText = document.createElement("h4");
-            pagesHeaderText.innerText = "PAGES";
-            pagesDiv.appendChild(pagesHeaderText);
-
-            const pagesText = document.createElement("p");
-            pagesText.innerText = `${book.pages}`;
-            pagesDiv.appendChild(pagesText);
-        }
-
-
         // const infoDivider = document.createElement("div")
         // infoDivider.classList.add("info-divider");
         // subInfoContainer.appendChild(infoDivider);
@@ -88,7 +73,7 @@ function createBookCard(book) {
             subInfoContainer.appendChild(yearDiv)
             
             const yearHeaderText = document.createElement("h4");
-            yearHeaderText.innerText = "RELEASED";
+            yearHeaderText.innerText = "Published";
             yearDiv.appendChild(yearHeaderText);
 
             const yearPublishedText = document.createElement("p");
@@ -96,6 +81,19 @@ function createBookCard(book) {
             yearDiv.appendChild(yearPublishedText);
         }
 
+        if (book.pages) {
+            const pagesDiv = document.createElement("div");
+            pagesDiv.classList.add("pages-div")
+            subInfoContainer.appendChild(pagesDiv)
+
+            const pagesHeaderText = document.createElement("h4");
+            pagesHeaderText.innerText = "Pages";
+            pagesDiv.appendChild(pagesHeaderText);
+
+            const pagesText = document.createElement("p");
+            pagesText.innerText = `${book.pages}`;
+            pagesDiv.appendChild(pagesText);
+        }
     }
 }
 
@@ -112,6 +110,10 @@ const bookForm = document.querySelector("#add-new-book-form")
 
 document.querySelector("#submit-button").addEventListener("click", (e) => {
     e.preventDefault();
+
+    if (bookForm.checkValidity() == false) {
+        console.log("missing elements");
+    }
 
     const formData = new FormData(bookForm);
     const bookData = [];
