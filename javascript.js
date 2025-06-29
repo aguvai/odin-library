@@ -52,6 +52,12 @@ function createBookCard(book) {
     infoContainer.appendChild(authorText);
 
 
+    // BUTTONS
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = "Remove from Library";
+    mainCard.appendChild(removeButton);
+
+
     // EXTRA INFO DATA DISPLAY
 
     if (book.pages || book.yearPublished) {
@@ -103,7 +109,7 @@ function displayBooks() {
     while (cardContainer.hasChildNodes()) {
         cardContainer.removeChild(cardContainer.lastChild);
     }
-    
+
     for (let book of myLibrary) {
         createBookCard(book);
     }
