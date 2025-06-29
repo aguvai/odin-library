@@ -71,3 +71,18 @@ function displayBooks() {
 }
 
 displayBooks();
+
+const bookForm = document.querySelector("#add-new-book-form")
+
+document.querySelector("#submit-button").addEventListener("click", (e) => {
+    console.log("CLICKED");
+    e.preventDefault();
+
+    const formData = new FormData(bookForm);
+    
+    for (const [key,value] of formData) {
+        console.log(`${key}: ${value}`);
+    }
+
+    bookForm.reset();
+})
