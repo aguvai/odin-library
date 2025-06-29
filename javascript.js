@@ -29,37 +29,52 @@ function createBookCard(book) {
     mainCard.classList.add("book-card");
     cardContainer.appendChild(mainCard);
 
+    const highlight = document.createElement("div");
+    highlight.classList.add("highlight");
+    mainCard.appendChild(highlight);
+    
+    // DATA DISPAY ELEMENTS
+
+    const infoHeader = document.createElement("div");
+    infoHeader.classList.add("info-header");
+    mainCard.appendChild(infoHeader);
+
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info-container");
-    mainCard.appendChild(infoContainer);
+    infoHeader.appendChild(infoContainer);
 
     const titleText = document.createElement("h2");
     titleText.innerText = book.title;
     infoContainer.appendChild(titleText);
 
     const authorText = document.createElement("h3");
-    authorText.innerText = book.author;
+    authorText.innerText = `by ${book.author}`;
     infoContainer.appendChild(authorText);
+
+
+    // EXTRA INFO DATA DISPLAY
+
+    if (book.pages || book.yearPublished) {
+        const subInfoContainer = document.createElement("div");
+    subInfoContainer.classList.add("subinfo-container");
+    infoHeader.appendChild(subInfoContainer);
 
     const divider = document.createElement("div")
     divider.classList.add("divider");
-    infoContainer.appendChild(divider);
-
-    const subinfoContainer = document.createElement("div");
-    subinfoContainer.classList.add("subinfo-container");
-    infoContainer.appendChild(subinfoContainer);
+    subInfoContainer.appendChild(divider);
 
     const pagesText = document.createElement("p");
     pagesText.innerText = `${book.pages} pages`;
-    subinfoContainer.appendChild(pagesText);
+    subInfoContainer.appendChild(pagesText);
 
     const infoDivider = document.createElement("div")
     infoDivider.classList.add("info-divider");
-    subinfoContainer.appendChild(infoDivider);
+    subInfoContainer.appendChild(infoDivider);
 
     const yearPublishedText = document.createElement("p");
     yearPublishedText.innerText = `${book.yearPublished}`;
-    subinfoContainer.appendChild(yearPublishedText);
+    subInfoContainer.appendChild(yearPublishedText);
+    }
 }
 
 function displayBooks() {
@@ -89,3 +104,8 @@ document.querySelector("#submit-button").addEventListener("click", (e) => {
 
     displayBooks();
 })
+
+addBookToLibrary(["This is a Book Title", "This is an Author's Name", 2031, 2025, false]);
+addBookToLibrary(["This is a Book Title", "This is an Author's Name", 2031, 2025, false]);
+
+displayBooks();

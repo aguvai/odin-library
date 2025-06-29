@@ -194,38 +194,64 @@ form input[type="submit"]:hover {
     padding: 2rem;
     
     display: grid;
-    grid-template-columns: repeat(auto-fill,  minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill,  minmax(400px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
 }
 
 .book-card {
+    position: relative;
+
     background-color: var(--off-white);
     border-radius: 8px;
 
-    padding: 1rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .25rem;
-
-    text-align: center;
+    padding: 1rem 1.5rem;
 
     box-shadow: 2px 4px 5px lightgray;
 }
 
-.info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.book-card .highlight {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    box-shadow: 3px 0px 5px lightgray;
+    
+    background-color: var(--brand-color);
+
+    height: 100%;
+    width: .5rem;
+
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
-.info-container .divider {
-    height: 1px;
-    background-color: lightgray;
-    width: 85%;
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 40%;
+}
+
+.info-container {
+    display: grid;
+    width: 75%;
+}
+
+.info-container h2 {
+    font-size: 1.25rem;
+}
+
+.info-container h3 {
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.info-header .divider {
+    width: 1px;
+    background-color: gray;
+    height: 80%;
 }
 
 .info-container .subinfo-container {
