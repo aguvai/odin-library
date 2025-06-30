@@ -52,7 +52,6 @@ function createMainInfoContainer(book, mainCard) {
 function createButtons(book, mainCard) {
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove")
-    removeButton.innerHTML = "X";
     mainCard.appendChild(removeButton);
 
     removeButton.addEventListener("click", (event) => {
