@@ -15,7 +15,7 @@ function Book(bookData) {
 
     this.toggleRead = function() {
         this.read = !this.read
-        return this.read;
+        return this.read ? "Mark as Unread" : "Mark as Read";
     }
 }
 
@@ -49,23 +49,26 @@ function createMainInfoContainer(book, mainCard) {
 }
 
 
-function createButtons(book, mainCard) {
+function createButtons(book, mainCard, header) {
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove")
-    mainCard.appendChild(removeButton);
+    header.appendChild(removeButton);
 
     removeButton.addEventListener("click", (event) => {
         
     })
 
+    const readButtonContainer = document.createElement("div");
+    readButtonContainer.classList.add("button-container");
+    mainCard.appendChild(readButtonContainer);
+
     const toggleReadButton = document.createElement("button");
     toggleReadButton.classList.add("toggle-read");
-    toggleReadButton.innerHTML = "Read";
-    mainCard.appendChild(toggleReadButton);
+    toggleReadButton.innerHTML = book.read ? "Mark as Unread" : "Mark as Read";
+    readButtonContainer.appendChild(toggleReadButton);
 
     toggleReadButton.addEventListener("click", (event) => {
-        book.toggleRead();
-        toggleReadButton.innerHTML = book.read;
+        toggleReadButton.innerHTML = book.toggleRead();
     })
 }
 
@@ -99,10 +102,6 @@ function createPagesDisplay(book, subInfoContainer) {
 }
 
 function createExtraInfoDisplay(book, infoHeader) {
-    const divider = document.createElement("div")
-    divider.classList.add("divider");
-    infoHeader.appendChild(divider);
-
     const subInfoContainer = document.createElement("div");
     subInfoContainer.classList.add("subinfo-container");
     infoHeader.appendChild(subInfoContainer);
@@ -128,13 +127,13 @@ function createBookCard(book) {
     mainCard.classList.add("book-card");
     cardContainer.appendChild(mainCard);
 
-    const highlight = document.createElement("div");
-    highlight.classList.add("highlight");
-    mainCard.appendChild(highlight);
+    const header = document.createElement("div");
+    header.classList.add("card-header");
+    mainCard.appendChild(header);
 
     infoHeader = createMainInfoContainer(book, mainCard);
 
-    createButtons(book, mainCard)
+    createButtons(book, mainCard, header)
 
     if (book.pages || book.yearPublished) {
         createExtraInfoDisplay(book, infoHeader)
