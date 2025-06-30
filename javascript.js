@@ -50,21 +50,19 @@ function createMainInfoContainer(book, mainCard) {
 
 
 function createButtons(book, mainCard) {
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container");
-    mainCard.appendChild(buttonContainer);
-
     const removeButton = document.createElement("button");
-    removeButton.innerHTML = "Remove from Library";
-    buttonContainer.appendChild(removeButton);
+    removeButton.classList.add("remove")
+    removeButton.innerHTML = "X";
+    mainCard.appendChild(removeButton);
 
     removeButton.addEventListener("click", (event) => {
         
     })
 
     const toggleReadButton = document.createElement("button");
+    toggleReadButton.classList.add("toggle-read");
     toggleReadButton.innerHTML = "Read";
-    buttonContainer.appendChild(toggleReadButton);
+    mainCard.appendChild(toggleReadButton);
 
     toggleReadButton.addEventListener("click", (event) => {
         book.toggleRead();
@@ -192,7 +190,6 @@ document.querySelector("#submit-button").addEventListener("click", (e) => {
         bookData.push(pages ? parseInt(pages) : null);
         bookData.push(year ? parseInt(year) : null);
         bookData.push(read);
-
 
         bookForm.reset();
 

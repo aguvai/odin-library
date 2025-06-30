@@ -298,3 +298,28 @@ form input[type="submit"]:hover {
     font-weight: 600;
     font-size: .9rem;
 }
+
+.book-card .button-container {
+    display: flex;
+}
+
+.book-card .remove {
+    position: absolute;
+    top: -.2rem;
+    right: -.2rem;
+
+    border-style: none;
+    background-color: rgb(226, 93, 93);
+    border-radius: 50%;
+    
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+
+    background-image: url(images/cancel.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 2rem;
+    height: 2rem;
+}
