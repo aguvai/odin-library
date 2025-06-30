@@ -13,17 +13,20 @@ function Book(bookData) {
 
     this.uniqueID = crypto.randomUUID();
 
-    this.info = function () {
-        return `${title} by ${author}, ${pages} pages, ${read}`;
+    this.toggleRead = function() {
+        this.read = !this.read
+        return this.read;
     }
 }
 
-function addBookToLibrary(title, author, pages, read, yearPublished) {
-    myLibrary.push(new Book(title, author, pages, read, yearPublished));
+function addBookToLibrary(bookData) {
+    myLibrary.push(new Book(bookData));
 }
 
 const cardContainer = document.querySelector(".card-container");
 
+
+// CARD DISPLAY HANDLING \\
 
 function createMainInfoContainer(book, mainCard) {
     const infoHeader = document.createElement("div");
@@ -47,20 +50,25 @@ function createMainInfoContainer(book, mainCard) {
 
 
 function createButtons(book, mainCard) {
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    mainCard.appendChild(buttonContainer);
+
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove from Library";
-    mainCard.appendChild(removeButton);
+    buttonContainer.appendChild(removeButton);
 
-    removeButton.addEventListener("click", () => {
-
+    removeButton.addEventListener("click", (event) => {
+        
     })
 
     const toggleReadButton = document.createElement("button");
     toggleReadButton.innerHTML = "Read";
-    mainCard.appendChild(toggleReadButton);
+    buttonContainer.appendChild(toggleReadButton);
 
-    toggleReadButton.addEventListener("click", () => {
-
+    toggleReadButton.addEventListener("click", (event) => {
+        book.toggleRead();
+        toggleReadButton.innerHTML = book.read;
     })
 }
 
@@ -146,6 +154,9 @@ function displayBooks() {
     }
 }
 
+
+// FORM HANDLING \\
+
 const bookForm = document.querySelector("#add-new-book-form")
 
 function displayValidity(isValid) {
@@ -170,11 +181,22 @@ document.querySelector("#submit-button").addEventListener("click", (e) => {
         const formData = new FormData(bookForm);
         const bookData = [];
 
-        for (const [key, value] of formData) {
-            bookData.push(value);
-        }
+        const title = formData.get("book-title");
+        const author = formData.get("author-name");
+        const pages = formData.get("pages");
+        const year = formData.get("year-published");
+        const read = formData.get("finished-book") === "true";
+
+        bookData.push(title);
+        bookData.push(author);
+        bookData.push(pages ? parseInt(pages) : null);
+        bookData.push(year ? parseInt(year) : null);
+        bookData.push(read);
+
 
         bookForm.reset();
+
+        console.log(bookData);
 
         addBookToLibrary(bookData);
 
@@ -184,7 +206,7 @@ document.querySelector("#submit-button").addEventListener("click", (e) => {
     }
 })
 
-addBookToLibrary(["This is a Book Title", "This is an Author's Name", 2031, 2025, false]);
-addBookToLibrary(["This is a Book Title", "This is an Author's Name", 2031, 2025, false]);
+addBookToLibrary(["This is a Book I Haven't Read", "This is an Author's Name", 2031, 2025, false]);
+addBookToLibrary(["This is a Book I Have Read", "This is an Author's Name", 2031, 2025, true]);
 
 displayBooks();
