@@ -13,7 +13,7 @@ function Book(bookData) {
 
     this.uniqueID = crypto.randomUUID();
 
-    this.toggleRead = function() {
+    this.toggleRead = function () {
         this.read = !this.read
         return this.read ? "Mark as Unread" : "Mark as Read";
     }
@@ -45,17 +45,35 @@ function createMainInfoContainer(book, mainCard) {
     authorText.innerText = `by ${book.author}`;
     infoContainer.appendChild(authorText);
 
-    return infoHeader
+    return infoHeader;
 }
 
 
+function setCardColor(read, mainCard, header, toggleReadButton, removeButton) {
+    const infoHeader = mainCard.querySelector('.info-header');
+    
+    if (read === true) {
+        header.style.backgroundColor = "rgb(103, 174, 110)"
+        toggleReadButton.style.backgroundColor = "rgb(103, 174, 110)";
+        infoHeader.style.backgroundColor = "rgb(223, 224, 175)";
+        removeButton.style.backgroundColor = "rgb(50, 142, 110)";
+    } else {
+        header.style.backgroundColor = "rgb(205, 86, 86)"
+        toggleReadButton.style.backgroundColor = "rgb(205, 86, 86)";
+        infoHeader.style.backgroundColor = "rgb(230, 207, 178)";
+        removeButton.style.backgroundColor = "rgb(175, 62, 62)";
+    }
+}
+
 function createButtons(book, mainCard, header) {
+    
+
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove")
     header.appendChild(removeButton);
 
     removeButton.addEventListener("click", (event) => {
-        
+
     })
 
     const readButtonContainer = document.createElement("div");
@@ -67,8 +85,16 @@ function createButtons(book, mainCard, header) {
     toggleReadButton.innerHTML = book.read ? "Mark as Unread" : "Mark as Read";
     readButtonContainer.appendChild(toggleReadButton);
 
+    // Set card color on initial load to match book's starting read value
+    setCardColor(book.read, mainCard, header, toggleReadButton, removeButton);
+
     toggleReadButton.addEventListener("click", (event) => {
         toggleReadButton.innerHTML = book.toggleRead();
+        if (book.read === false) {
+            setCardColor(false, mainCard, header, toggleReadButton, removeButton);
+        } else {
+            setCardColor(true, mainCard, header, toggleReadButton, removeButton);
+        }
     })
 }
 
