@@ -73,7 +73,10 @@ function createButtons(book, mainCard, header) {
     header.appendChild(removeButton);
 
     removeButton.addEventListener("click", (event) => {
+        const card = cardContainer.querySelector(`[data-card-id="${book.uniqueID}"]`);
+        card.remove();
 
+        myLibrary.splice(myLibrary.indexOf(book), 1);
     })
 
     const readButtonContainer = document.createElement("div");
@@ -151,6 +154,7 @@ function createExtraInfoDisplay(book, infoHeader) {
 function createBookCard(book) {
     const mainCard = document.createElement("div");
     mainCard.classList.add("book-card");
+    mainCard.dataset.cardId = book.uniqueID;
     cardContainer.appendChild(mainCard);
 
     const header = document.createElement("div");
